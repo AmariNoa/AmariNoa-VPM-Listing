@@ -1,28 +1,18 @@
 {
-    "name":"Example Listing",
-    "id":"com.vrchat.example-listing",
-    "url":"https://vrchat-community.github.io/template-package-listing/index.json",
+    "name":"AmariNoa's vpm repo",
+    "id":"com.amari-noa.vpm",
+    "url":"https://amarinoa.github.io/amarinoa-vpm-listing/index.json",
     "author":{
-        "email":"developer@vrchat.com",
-        "name":"VRChat",
-        "url":"https://hello.vrchat.com"
+        "email":"amarinoa@outlook.jp",
+        "name":"Amari Noa",
+        "url":"https://github.com/AmariNoa"
     },
-    "description":"Example listing of VRChat packages",
+    "description":"A collection of VRChat packages by Amari Noa",
     "infoLink":{
-        "url":"http://github.com/vrchat-community/template-package-listing",
+        "url":"https://github.com/AmariNoa/AmariNoa-VPM-Listing",
         "text":"View on GitHub"
     },
-    "bannerUrl":"banner.png",
     "githubRepos":[
-        "vrchat-community/clientsim"
-    ],
-    "packages":[
-        {
-            "name":"com.vrchat.udonsharp",
-            "releases":[
-                "https://github.com/vrchat-community/UdonSharp/releases/download/1.1.7/com.vrchat.UdonSharp.zip",
-                "https://github.com/vrchat-community/UdonSharp/releases/download/1.1.6/com.vrchat.UdonSharp-1.1.6.zip"
-            ]
-        }
+        "AmariNoa/Avatar-Modular-Assistant-for-Refinement-Integration"
     ]
 }
