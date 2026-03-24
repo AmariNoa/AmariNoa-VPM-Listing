@@ -15,6 +15,7 @@
     "githubRepos":[
         "AmariNoa/Avatar-Modular-Assistant-for-Refinement-Integration",
         "AmariNoa/UnityPackage-Pipeline-Core",
-        "AmariNoa/Unity-Editor-Localization-Core"
+        "AmariNoa/Unity-Editor-Localization-Core",
+        "AmariNoa/SQLite-net-for-VPM"
     ]
 }
