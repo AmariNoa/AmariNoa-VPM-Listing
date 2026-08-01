@@ -17,6 +17,7 @@
         "AmariNoa/UnityPackage-Pipeline-Core",
         "AmariNoa/Unity-Editor-Localization-Core",
         "AmariNoa/SQLite-net-for-VPM",
-        "AmariNoa/BLM-Integration-Core"
+        "AmariNoa/BLM-Integration-Core",
+        "AmariNoa/Materilune"
     ]
 }
