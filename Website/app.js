@@ -138,11 +138,22 @@ const setTheme = () => {
     packageInfoModal.hidden = true;
   });
 
-  // Fluent dialogs use nested shadow-rooted elements, so we need to use JS to style them
-  const modalControl = packageInfoModal.shadowRoot.querySelector('.control');
-  modalControl.style.maxHeight = "90%";
-  modalControl.style.transition = 'height 0.2s ease-in-out';
-  modalControl.style.overflowY = 'hidden';
+  // Fluent dialogs use nested shadow-rooted elements, so we need to use JS to style them.
+  // The shadow content is rendered asynchronously, so the control is resolved on every use.
+  const MODAL_LAYOUT_FRAME_LIMIT = 30;
+
+  const styleModalControl = () => {
+    const modalControl = packageInfoModal.shadowRoot?.querySelector('.control');
+    if (!modalControl) {
+      return null;
+    }
+    modalControl.style.maxHeight = "90%";
+    modalControl.style.transition = 'height 0.2s ease-in-out';
+    modalControl.style.overflowY = 'hidden';
+    return modalControl;
+  };
+
+  styleModalControl();
 
   const packageInfoName = document.getElementById('packageInfoName');
   const packageInfoId = document.getElementById('packageInfoId');
@@ -206,10 +217,25 @@ const setTheme = () => {
 
       packageInfoModal.hidden = false;
 
-      setTimeout(() => {
+      // fluent-dialog drops its hidden attribute asynchronously, so the content has no layout box
+      // for the first few frames. Retry until it can be measured, with a frame limit so a dialog
+      // that never lays out keeps the default height instead of looping forever.
+      const applyDialogHeight = (framesLeft) => {
+        const modalControl = styleModalControl();
         const height = packageInfoModal.querySelector('.col').clientHeight;
-        modalControl.style.setProperty('--dialog-height', `${height + 14}px`);
-      }, 1);
+        if (modalControl && height > 0) {
+          modalControl.style.setProperty('--dialog-height', `${height + 14}px`);
+          return;
+        }
+        if (framesLeft > 0) {
+          requestAnimationFrame(() => applyDialogHeight(framesLeft - 1));
+        } else if (modalControl) {
+          // Give up rather than keep a height measured for a previously opened package.
+          modalControl.style.removeProperty('--dialog-height');
+        }
+      };
+
+      requestAnimationFrame(() => applyDialogHeight(MODAL_LAYOUT_FRAME_LIMIT));
     });
   });
 
